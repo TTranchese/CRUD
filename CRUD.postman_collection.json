@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "12445df0-32cf-4882-a422-1eca6cf86096",
+		"name": "CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26099444",
+		"_collection_link": "https://grey-eclipse-85596.postman.co/workspace/My-Workspace~86a21c66-3080-4d38-8c0b-baa024158f96/collection/26099444-12445df0-32cf-4882-a422-1eca6cf86096?action=share&creator=26099444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create first car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"modelName\" : \"yaris\",\r\n    \"type\" : \"utilitaria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cars",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create second car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"modelName\" : \"audi tt\",\r\n    \"type\" : \"berlina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cars",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an absent car",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a type of a specific car",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/1?newType=sportiva",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"1"
+					],
+					"query": [
+						{
+							"key": "newType",
+							"value": "sportiva"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a type of an absent car",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/3?newType=sportiva",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"3"
+					],
+					"query": [
+						{
+							"key": "newType",
+							"value": "sportiva"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a car by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an absent car",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all db",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars/delete-all",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars",
+						"delete-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
