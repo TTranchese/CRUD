@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequestMapping("/cars")
 public class CarController {
 	@Autowired
-	CarRepository carRepository;
+	private CarRepository carRepository;
 	
 	@PostMapping
 	public ResponseEntity<String> insertCar(@RequestBody CarEntity car) {
@@ -38,17 +38,20 @@ public class CarController {
 		Optional<CarEntity> carEntity = carRepository.findById(id);
 		if (carEntity.isPresent()) {
 			return new ResponseEntity<>(carEntity.get(), HttpStatus.FOUND);
-		} else return new ResponseEntity<>(new CarEntity(), HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(new CarEntity(), HttpStatus.NOT_FOUND);
+		}
 	}
 	
-	//sinceramente qui non capisco quale sia il problema, l'esercizio mi chiede di modificare il type, non tutta la car
 	@PutMapping("/{id}")
 	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestBody CarEntity newCar) {
 		if (carRepository.existsById(id)) {
 			newCar.setId(id);
 			carRepository.save(newCar);
 			return new ResponseEntity<>(newCar, HttpStatus.OK);
-		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@DeleteMapping("/{id}")
@@ -58,7 +61,9 @@ public class CarController {
 			CarEntity carEntity = optionalCarEntity.get();
 			carRepository.deleteById(id);
 			return new ResponseEntity<>(carEntity, HttpStatus.OK);
-		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@DeleteMapping("/delete-all")
