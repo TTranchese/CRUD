@@ -38,6 +38,7 @@ public class CarController {
 	@PutMapping("/{id}")
 	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestBody CarEntity newCar){
 		if (carRepository.existsById(id)) {
+			newCar.setId(id);
 			carRepository.save(newCar);
 			return new ResponseEntity<>(newCar, HttpStatus.OK);
 		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
