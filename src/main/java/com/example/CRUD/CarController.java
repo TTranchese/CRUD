@@ -36,15 +36,11 @@ public class CarController {
 	}
 	//sinceramente qui non capisco quale sia il problema, l'esercizio mi chiede di modificare il type, non tutta la car
 	@PutMapping("/{id}")
-	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestParam String newType){
-		CarEntity carEntity = new CarEntity();
-		Optional<CarEntity> oldCarEntity = carRepository.findById(id);
-		if (oldCarEntity.isPresent()) {
-			carEntity=oldCarEntity.get();
-			carEntity.setType(newType);
-			carRepository.save(carEntity);
-			return new ResponseEntity<>(carEntity, HttpStatus.OK);
-		} else return new ResponseEntity<>(carEntity, HttpStatus.NOT_FOUND);
+	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestBody CarEntity newCar){
+		if (carRepository.existsById(id)) {
+			carRepository.save(newCar);
+			return new ResponseEntity<>(newCar, HttpStatus.OK);
+		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<CarEntity> deleteCar(@PathVariable int id){
@@ -53,7 +49,7 @@ public class CarController {
 			CarEntity carEntity = optionalCarEntity.get();
 			carRepository.deleteById(id);
 			return new ResponseEntity<>(carEntity, HttpStatus.OK);
-		} else return new ResponseEntity<>(HttpStatus.CONFLICT);
+		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	@DeleteMapping("/delete-all")
 	public ResponseEntity<String> deleteAllCars(){
