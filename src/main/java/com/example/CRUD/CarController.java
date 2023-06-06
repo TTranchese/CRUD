@@ -2,9 +2,15 @@ package com.example.CRUD;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,26 +40,29 @@ public class CarController {
 			return new ResponseEntity<>(carEntity.get(), HttpStatus.FOUND);
 		} else return new ResponseEntity<>(new CarEntity(), HttpStatus.NOT_FOUND);
 	}
+	
 	//sinceramente qui non capisco quale sia il problema, l'esercizio mi chiede di modificare il type, non tutta la car
 	@PutMapping("/{id}")
-	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestBody CarEntity newCar){
+	public ResponseEntity<CarEntity> updateCarType(@PathVariable int id, @RequestBody CarEntity newCar) {
 		if (carRepository.existsById(id)) {
 			newCar.setId(id);
 			carRepository.save(newCar);
 			return new ResponseEntity<>(newCar, HttpStatus.OK);
 		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CarEntity> deleteCar(@PathVariable int id){
+	public ResponseEntity<CarEntity> deleteCar(@PathVariable int id) {
 		Optional<CarEntity> optionalCarEntity = carRepository.findById(id);
-		if (optionalCarEntity.isPresent()){
+		if (optionalCarEntity.isPresent()) {
 			CarEntity carEntity = optionalCarEntity.get();
 			carRepository.deleteById(id);
 			return new ResponseEntity<>(carEntity, HttpStatus.OK);
 		} else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
 	@DeleteMapping("/delete-all")
-	public ResponseEntity<String> deleteAllCars(){
+	public ResponseEntity<String> deleteAllCars() {
 		carRepository.deleteAll();
 		return new ResponseEntity<>("Deleted all the cars", HttpStatus.OK);
 	}
